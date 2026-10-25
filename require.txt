@@ -1,0 +1,84 @@
+BÀI TẬP CÁ NHÂN: BUILDING BACK-END WITH GOLANG1. Thông tin chung
+Hình thức: Bài tập cá nhân (mỗi học viên làm độc lập)
+Công cụ: Go (>= 1.21), Gin hoặc Echo hoặc Fiber, PostgreSQL hoặc MySQL, Docker, Git, GitHub
+Thời gian thực hiện: 2 tuần
+Cách nộp:
+Upload source code lên GitHub (public repo, chia sẻ link với giảng viên).
+Kèm file README.md mô tả kiến trúc, hướng dẫn chạy, hướng dẫn test API.
+Báo cáo cá nhân (Word/PDF, 5-10 trang): Mô tả quá trình làm bài, khó khăn gặp phải, lessons learned, video demo (ít nhất 2 phút) chạy API bằng Postman hoặc curl.
+Lưu ý khi nộp: Ghi rõ họ tên, mã số học viên, lớp. Nộp đúng hạn qua link do giảng viên cung cấp.2. Tiêu chí đánh giá (tổng 100 điểm)
+Hoàn thành core features (40 điểm): REST API đầy đủ, CRUD, authentication, middleware, kết nối database.
+Chất lượng code & kiến trúc (25 điểm): Code sạch, cấu trúc rõ ràng, tách layer, xử lý lỗi tốt, có unit test.
+Tổ chức repo & tài liệu (20 điểm): Repo sạch sẽ, commit rõ ràng, README đầy đủ, API documentation.
+Sáng tạo & tối ưu (15 điểm): Docker, CI/CD, caching, rate limiting, logging, performance tốt.
+3. Mô tả bài tập: Building Back-End with Golang
+Bạn sẽ xây dựng một REST API hoàn chỉnh bằng Golang, kết nối database, có authentication, middleware, và deploy được. Bài tập gồm 3 phần: xây dựng API, authentication & middleware, và tối ưu & deploy.
+Chọn một trong các đề tài sau:Hệ thống quản lý công việc (Task Management): User, Project, Task, Comment.Hệ thống blog (Blog API): User, Post, Category, Comment, Like.Hệ thống thương mại điện tử mini (E-commerce API): User, Product, Category, Cart, Order.Hệ thống quản lý thư viện (Library API): User, Book, Author, Borrow, Return.Hệ thống đặt vé xem phim (Movie Ticket API): User, Movie, Cinema, Showtime, Ticket.Phần 1: Xây dựng REST API (bắt buộc)
+Sử dụng Gin, Echo, hoặc Fiber làm web framework.
+Xây dựng ít nhất 5 endpoint CRUD cho mỗi resource chính (GET, POST, PUT, DELETE).
+Kết nối database (PostgreSQL hoặc MySQL) bằng GORM hoặc sqlx.
+Cấu trúc project rõ ràng: handlers/, services/, repositories/, models/, middlewares/, configs/.
+Xử lý lỗi tập trung (centralized error handling), trả về JSON response chuẩn.
+Validation input bằng thư viện validator.
+Viết unit test cho ít nhất 3 handler hoặc service bằng testing package và testify.
+Phần 2: Authentication & Middleware (bắt buộc)
+Xây dựng chức năng đăng ký (register) và đăng nhập (login).
+Sử dụng JWT (JSON Web Token) để xác thực.
+Mã hóa mật khẩu bằng bcrypt.
+Viết middleware xác thực JWT, bảo vệ các route private.
+Viết middleware logging (ghi log request/response).
+Viết middleware CORS.
+Phân quyền user (admin, user) nếu có thể.
+Phần 3: Tối ưu & Deploy (bắt buộc)
+Viết Dockerfile multi-stage build cho ứng dụng Go.
+Viết docker-compose.yml để chạy app cùng database.
+Thêm caching với Redis cho các endpoint thường truy vấn.
+Thêm rate limiting middleware.
+Viết API documentation bằng Swagger (swaggo) hoặc Postman collection.
+Deploy lên VPS, Render, Railway, hoặc Fly.io.
+Viết CI pipeline với GitHub Actions (lint, test, build).
+Bonus (thêm điểm sáng tạo):
+Thêm pagination, filtering, sorting cho các endpoint GET.
+Thêm soft delete cho các resource.
+Thêm background job (ví dụ: gửi email) bằng goroutine hoặc worker pool.
+Thêm WebSocket cho real-time notification.
+Thêm graceful shutdown cho server.
+Thêm Prometheus metrics và health check endpoint.
+Viết integration test với testcontainers.
+4. Gợi ý phân chia công việc theo tuần
+Tuần 1: Xây dựng API và authentication
+Ngày 1-2: Setup project Go, chọn framework, cấu trúc thư mục, kết nối database.
+Ngày 3-4: Xây dựng models, migrations, repositories, services cho resource chính.
+Ngày 5-6: Xây dựng handlers, CRUD endpoints, validation, xử lý lỗi.
+Ngày 7: Xây dựng authentication (register, login, JWT), middleware xác thực.
+Tuần 2: Middleware, tối ưu và deploy
+Ngày 8-9: Viết middleware logging, CORS, rate limiting, unit test.
+Ngày 10-11: Thêm caching Redis, pagination, filtering, viết Swagger documentation.
+Ngày 12: Viết Dockerfile, docker-compose, CI pipeline với GitHub Actions.
+Ngày 13: Deploy lên cloud, test API trên môi trường production.
+Ngày 14: Quay video demo, viết báo cáo, nộp bài, gửi link GitHub và link deploy.
+5. Hướng dẫn thực hiệnSetup project: Dùng go mod init để khởi tạo module. Chọn Gin nếu mới bắt đầu vì cộng đồng lớn, tài liệu nhiều.Cấu trúc thư mục: Chia rõ ràng: cmd/ (main), internal/ (handlers, services, repositories, models), pkg/ (utils), configs/, migrations/, tests/.Version control: Sử dụng GitHub ngay từ đầu. Commit hàng ngày với message rõ ràng (e.g., "Add user registration endpoint").Database: Dùng GORM cho nhanh, hoặc sqlx nếu muốn kiểm soát SQL. Viết migration bằng golang-migrate hoặc goose.Testing: Viết unit test cho service layer, dùng testify để assert. Mock database bằng sqlmock hoặc testcontainers.Tài liệu tham khảo:
+Sách: "The Go Programming Language" (Donovan & Kernighan), "Go in Action".
+Trang web: Go by Example, Effective Go, Gin Docs.
+YouTube: "Go REST API Tutorial" của Traversy Media hoặc freeCodeCamp.
+Kiểm tra: Chạy go vet, gofmt, golangci-lint để đảm bảo code sạch. Test API bằng Postman hoặc curl.Trình bày: Quay video demo 2-3 phút chạy API, upload lên YouTube, gửi link trong phần trả bài.6. Yêu cầu về báo cáo cá nhân
+Báo cáo dài 5-10 trang, bao gồm các phần sau:
+Trang bìa: Họ tên, mã số học viên, lớp, tên bài tập.
+Mục tiêu và phạm vi bài làm.
+Mô tả hệ thống: Đề tài chọn, tính năng chính, công nghệ sử dụng.
+Kiến trúc ứng dụng: Sơ đồ layer (handler, service, repository), luồng request/response.
+Thiết kế database: ERD, các bảng chính, mối quan hệ.
+Mô tả chi tiết các endpoint: Method, path, request body, response, status code.
+Authentication: Cách hoạt động của JWT, middleware.
+Testing: Mô tả unit test, coverage.
+Docker & Deploy: Mô tả Dockerfile, docker-compose, CI/CD, link deploy.
+Khó khăn gặp phải và cách giải quyết.
+Lessons learned (bài học rút ra).
+Link GitHub, link API deploy, link video demo.
+7. Lưu ý
+Không copy code từ internet mà không hiểu. Giảng viên có thể hỏi vấn đáp.
+Ưu tiên hoàn thành core features trước, sau đó mới thêm bonus.
+Đảm bảo API chạy được và trả về response đúng chuẩn RESTful.
+Không commit file .env hoặc secrets vào repo. Sử dụng biến môi trường.
+Nộp bài đúng hạn. Bài nộp muộn sẽ bị trừ điểm theo quy định của giảng viên.
+Mọi thắc mắc trong quá trình làm bài, liên hệ giảng viên qua email hoặc lớp học.
